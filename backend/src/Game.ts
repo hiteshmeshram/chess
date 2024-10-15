@@ -50,7 +50,7 @@ export class Game {
             this.player1.send(JSON.stringify({
                 type: GAME_OVER,
                 payload: {
-                    winner: this.board.turn() === "b" ? "black" : "white"
+                    winner: this.board.turn() === "w" ? "black" : "white"
                 }
             }))
 
@@ -62,8 +62,26 @@ export class Game {
             }))
 
             return;
-
             //add logic to send to user that its their turn 
+        }
+
+        //send user that its theier turn 
+        if(this.board.turn()==="w") {
+            this.player1.send(JSON.stringify({
+                type: INIT_GAME,
+                payload: {
+                    message: "its your turn"
+                }
+            }))
+        }
+
+        if (this.board.turn()==="b") {
+            this.player2.send(JSON.stringify({
+                type: INIT_GAME,
+                payload: {
+                    message: "its your turn"
+                }
+            }))
         }
     }
 }
